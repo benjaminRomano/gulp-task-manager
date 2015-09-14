@@ -1,0 +1,24 @@
+{
+  "name": "gulp-task-manager",
+  "version": "1.0.0",
+  "description": "Easily re-use existing gulp tasks to speed up gulpfile development",
+  "main": "gulp-task-manager.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjaminRomano/gulp-task-manager.git"
+  },
+  "keywords": [
+    "gulp",
+    "task",
+    "manager"
+  ],
+  "author": "Benjamin Romano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjaminRomano/gulp-task-manager/issues"
+  },
+  "homepage": "https://github.com/benjaminRomano/gulp-task-manager"
+}
