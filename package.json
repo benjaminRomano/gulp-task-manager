@@ -1,6 +1,6 @@
 {
   "name": "gulp-task-manager",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Easily re-use existing gulp tasks to speed up gulpfile development",
   "main": "gulp-task-manager.js",
   "scripts": {
