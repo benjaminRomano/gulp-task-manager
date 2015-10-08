@@ -18,46 +18,45 @@ var GulpTaskManager = function(path) {
 };
 
 GulpTaskManager.prototype.load = function(tasks, gulp, config) {
-	tasks = Array.isArray(tasks) ? tasks : [].concat(tasks);
+	var self = this;
 
-	for (var task of tasks) {
-		if (typeof(this[task]) === "function") {
-			var missingTasks = this.isMissingDependencies(task);
+	tasks.forEach(function(task){
+		if (typeof(self[task]) === "function") {
+			var missingTasks = self.isMissingDependencies(task);
 
 			if (missingTasks) {
-				for (var missingTask of missingTasks) {
+				missingTasks.forEach(function(missingTask){
 					console.log("Missing task: " + missingTask);
-				}
+				});
 			} else {
-				this[task](gulp, config);
+				self[task](gulp, config);
 			}
 		} else {
 			console.log("Missing task: " + task);
 		}
-	}
+	});
 };
 
-
 GulpTaskManager.prototype.isMissingDependencies = function(task) {
-	if(!this[task].dependencies) {
-		return false;
-	}
-	var missingDependencies = [];
-	for (var dependency of this[task].dependencies) {
-		if (!this[dependency]) {
-			missingDependencies.push(dependency);
-		}
-	}
-
-	return missingDependencies.length ? missingDependencies : false;
+    var missingDependencies = [];
+    var self = this;
+    this[task].dependencies.forEach(function(dependency){
+        if (!self[dependency]) {
+            missingDependencies.push(dependency);
+        }
+    });
+    return missingDependencies.length ? missingDependencies : false;
 };
 
 GulpTaskManager.prototype.addTasks = function(tasks) {
-	tasks = Array.isArray(tasks) ? tasks : [].concat(tasks);
-	for (var task of tasks) {
-		this[task.name] = task.task;
-		this[task.name].dependencies = task.dependencies || [];
-	}
+    tasks = Array.isArray(tasks) ? tasks : [].concat(tasks);
+    var self = this;
+
+    tasks.forEach(function(task){
+        self[task.name] = task.task;
+        self[task.name].dependencies = task.dependencies || [];
+    });
+
 };
 
 module.exports = GulpTaskManager;
